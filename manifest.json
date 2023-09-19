@@ -7,12 +7,12 @@
     "background_color": "#fff",
     "icons": [
         {
-            "src": "/public/img/512.png",
+            "src": "/img/512.png",
             "sizes": "512x512",
             "type": "image/png"
         },
         {
-            "src": "/public/img/192.png",
+            "src": "/img/192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any maskable"
@@ -20,42 +20,42 @@
     ],
     "screenshots": [
         {
-            "src": "/public/img/1.jpg",
+            "src": "/img/1.jpg",
             "type": "image/jpeg",
             "sizes": "720*1520"
         },
         {
-            "src": "/public/img/2.jpg",
+            "src": "/img/2.jpg",
             "type": "image/jpeg",
             "sizes": "720*1520"
         },
         {
-            "src": "/public/img/3.jpg",
+            "src": "/img/3.jpg",
             "type": "image/jpeg",
             "sizes": "720*1520"
         },
         {
-            "src": "/public/img/4.jpg",
+            "src": "/img/4.jpg",
             "type": "image/jpeg",
             "sizes": "720*1520"
         },
         {
-            "src": "/public/img/5.jpg",
+            "src": "/img/5.jpg",
             "type": "image/jpeg",
             "sizes": "720*1520"
         },
         {
-            "src": "/public/img/6.jpg",
+            "src": "/img/6.jpg",
             "type": "image/jpeg",
             "sizes": "720*1520"
         },
         {
-            "src": "/public/img/7.jpg",
+            "src": "/img/7.jpg",
             "type": "image/jpeg",
             "sizes": "720*1520"
         },
         {
-            "src": "/public/img/8.jpg",
+            "src": "/img/8.jpg",
             "type": "image/jpeg",
             "sizes": "720*1520"
         }
