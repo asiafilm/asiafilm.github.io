@@ -1,51 +1,101 @@
-const cacheName = 'asiafilm-v1';
-const staticAssets = [
-  '/',
-  '/index.html',
-  '/public/main.js',
-  '/public/manifest.json',
-  '/movie',
-  '/history',
-  '/bookmarks',
-  '/settings',
-  '/search'
-];
+'use strict';
 
-self.addEventListener('install', async e => {
-  const cache = await caches.open(cacheName);
-  await cache.addAll(staticAssets);
-  return self.skipWaiting();
+var cache_storage_name = 'asiafilm-pwa-1.0';
+var start_page = '/index.html';
+var offline_page = '/public/offline.html';
+var first_cache_urls = [start_page, offline_page, '/', '/history', '/movie', '/search', '/settings', '/bookmarks'];
+var never_cache_urls = [];
+
+// Install 
+self.addEventListener('install', function (e) {
+	console.log('PWA sw installation');
+	e.waitUntil(caches.open(cache_storage_name).then(function (cache) {
+		console.log('PWA sw caching first urls');
+		first_cache_urls.map(function (url) {
+			return cache.add(url).catch(function (res) {
+				return console.log('PWA: ' + String(res) + ' ' + url);
+			});
+		});
+	}));
 });
 
-self.addEventListener('activate', e => {
-  self.clients.claim();
+// Activate
+self.addEventListener('activate', function (e) {
+	console.log('PWA sw activation');
+	e.waitUntil(caches.keys().then(function (kl) {
+		return Promise.all(kl.map(function (key) {
+			if (key !== cache_storage_name) {
+				console.log('PWA old cache removed', key);
+				return caches.delete(key);
+			}
+		}));
+	}));
+	return self.clients.claim();
 });
 
-self.addEventListener('fetch', async e => {
-  const req = e.request;
-  const url = new URL(req.url);
+// Fetch
+self.addEventListener('fetch', function (e) {
 
-  if (url.origin === location.origin) {
-    e.respondWith(cacheFirst(req));
-  } else {
-    e.respondWith(networkAndCache(req));
-  }
+	if (!checkFetchRules(e)) return;
+
+	// Strategy for online user
+	if (e.request.mode === 'navigate' && navigator.onLine) {
+		e.respondWith(fetch(e.request).then(function (response) {
+			return caches.open(cache_storage_name).then(function (cache) {
+				if (never_cache_urls.every(check_never_cache_urls, e.request.url)) {
+					cache.put(e.request, response.clone());
+				}
+				return response;
+			});
+		}));
+		return;
+	}
+
+	// Strategy for offline user
+	e.respondWith(caches.match(e.request).then(function (response) {
+		return response || fetch(e.request).then(function (response) {
+			return caches.open(cache_storage_name).then(function (cache) {
+				if (never_cache_urls.every(check_never_cache_urls, e.request.url)) {
+					cache.put(e.request, response.clone());
+				}
+				return response;
+			});
+		});
+	}).catch(function () {
+		return caches.match(offline_page);
+	}));
 });
 
-async function cacheFirst(req) {
-  const cache = await caches.open(cacheName);
-  const cached = await cache.match(req);
-  return cached || fetch(req);
+// Check never cache urls 
+function check_never_cache_urls(url) {
+	if (this.match(url)) {
+		return false;
+	}
+	return true;
 }
 
-async function networkAndCache(req) {
-  const cache = await caches.open(cacheName);
-  try {
-    const fresh = await fetch(req);
-    await cache.put(req, fresh.clone());
-    return fresh;
-  } catch (e) {
-    const cached = await cache.match(req);
-    return cached;
-  }
+// Fetch Rules
+function checkFetchRules(e) {
+
+	// Check request url from inside domain.
+	if (new URL(e.request.url).origin !== location.origin) return;
+
+	// Check request url http or https
+	if (!e.request.url.match(/^(http|https):\/\//i)) return;
+
+	// Show offline page for POST requests
+	if (e.request.method !== 'GET') {
+		return caches.match(offline_page);
+	}
+
+	return true;
+}
+
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js");
+if (workbox.googleAnalytics) {
+	try {
+		workbox.googleAnalytics.initialize();
+	} catch (e) {
+		console.log(e.message);
+	}
 }

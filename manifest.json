@@ -3,7 +3,7 @@
     "short_name": "AsiaFilm",
     "description": "Download Free Movies",
     "start_url": "/",
-    "display": "fullscreen",
+    "display": "standalone",
     "background_color": "#fff",
     "icons": [
         {
@@ -16,6 +16,48 @@
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/public/img/1.jpg",
+            "type": "image/jpeg",
+            "sizes": "720*1520"
+        },
+        {
+            "src": "/public/img/2.jpg",
+            "type": "image/jpeg",
+            "sizes": "720*1520"
+        },
+        {
+            "src": "/public/img/3.jpg",
+            "type": "image/jpeg",
+            "sizes": "720*1520"
+        },
+        {
+            "src": "/public/img/4.jpg",
+            "type": "image/jpeg",
+            "sizes": "720*1520"
+        },
+        {
+            "src": "/public/img/5.jpg",
+            "type": "image/jpeg",
+            "sizes": "720*1520"
+        },
+        {
+            "src": "/public/img/6.jpg",
+            "type": "image/jpeg",
+            "sizes": "720*1520"
+        },
+        {
+            "src": "/public/img/7.jpg",
+            "type": "image/jpeg",
+            "sizes": "720*1520"
+        },
+        {
+            "src": "/public/img/8.jpg",
+            "type": "image/jpeg",
+            "sizes": "720*1520"
         }
     ]
 }
