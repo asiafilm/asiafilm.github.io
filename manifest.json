@@ -22,42 +22,42 @@
         {
             "src": "/img/1.jpg",
             "type": "image/jpeg",
-            "sizes": "720*1520"
+            "sizes": "720x1520"
         },
         {
             "src": "/img/2.jpg",
             "type": "image/jpeg",
-            "sizes": "720*1520"
+            "sizes": "720x1520"
         },
         {
             "src": "/img/3.jpg",
             "type": "image/jpeg",
-            "sizes": "720*1520"
+            "sizes": "720x1520"
         },
         {
             "src": "/img/4.jpg",
             "type": "image/jpeg",
-            "sizes": "720*1520"
+            "sizes": "720x1520"
         },
         {
             "src": "/img/5.jpg",
             "type": "image/jpeg",
-            "sizes": "720*1520"
+            "sizes": "720x1520"
         },
         {
             "src": "/img/6.jpg",
             "type": "image/jpeg",
-            "sizes": "720*1520"
+            "sizes": "720x1520"
         },
         {
             "src": "/img/7.jpg",
             "type": "image/jpeg",
-            "sizes": "720*1520"
+            "sizes": "720x1520"
         },
         {
             "src": "/img/8.jpg",
             "type": "image/jpeg",
-            "sizes": "720*1520"
+            "sizes": "720x1520"
         }
     ]
 }
