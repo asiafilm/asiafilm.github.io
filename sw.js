@@ -3,7 +3,7 @@
 var cache_storage_name = 'asiafilm-pwa-1.0';
 var start_page = '/index.html';
 var offline_page = '/offline.html';
-var first_cache_urls = [start_page, offline_page, '/', '/history', '/movie', '/search', '/settings', '/bookmarks'];
+var first_cache_urls = [start_page, offline_page, '/', '/history', '/movie', '/search', '/settings', '/request', '/bookmarks'];
 var never_cache_urls = [];
 
 // Install 
